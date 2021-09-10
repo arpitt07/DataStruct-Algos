@@ -11,7 +11,7 @@ class SLinkedList:
         self.headval = None
 
     #traverse through the list
-    def search(self):
+    def printit(self):
         val = self.headval
         while val is not None:
             print(val.dataval)
@@ -47,19 +47,35 @@ class SLinkedList:
         midnode.nextval = mid_node.nextval
         mid_node.nextval = midnode
 
+    #removing an element
+    def removeElement(self, remove_elm):
+        temp = self.headval
+        if temp is not None:
+            if temp.dataval == remove_elm:
+                self.headval = temp.nextval
+                temp = None
+                return
+
+        while temp is not None:
+            if temp.dataval == remove_elm:
+                break
+            prev = temp
+            temp = temp.nextval
+
+        if temp == None:
+            print("None found")
+            return
+
+        prev.nextval = temp.nextval
+        temp = None
+
 
 list1 = SLinkedList()
+
 list1.headval = Node("Monday")
-
-e2 = Node("Tuesday")
-e3 = Node("Wednesday")
-
-#connect the nodes
-list1.headval.nextval = e2
-
-e2.nextval = e3
-
-
-
+list1.atBegining("Tuesday")
+list1.atEnd("Friday")
 list1.inBetween(list1.headval.nextval, "random")
-list1.search()
+
+list1.removeElement("random")
+list1.printit()
